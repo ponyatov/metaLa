@@ -3,7 +3,7 @@
 
 extern "C" JNIEXPORT jstring JNICALL
 Java_io_github_ponyatov_pforth_MainActivity_stringFromJNI(
-        JNIEnv* env,
+        JNIEnv *env,
         jobject /* this */) {
     std::string hello = "Hello from C++";
     return env->NewStringUTF(hello.c_str());
