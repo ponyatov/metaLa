@@ -2,6 +2,7 @@ package io.github.ponyatov.pforth;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,8 +18,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Example of a call to a native method
-        TextView tv = findViewById(R.id.sample_text);
-        tv.setText(stringFromJNI());
+        TextView dump = findViewById(R.id.dump);
+        dump.setText(stringFromJNI());
+
+        TextView pad = findViewById(R.id.pad);
+
+        Button go = findViewById(R.id.go);
+
     }
 
     /**
