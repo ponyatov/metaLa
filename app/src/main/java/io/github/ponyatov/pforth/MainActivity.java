@@ -2,7 +2,7 @@ package io.github.ponyatov.pforth;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,9 +21,7 @@ public class MainActivity extends AppCompatActivity {
         TextView dump = findViewById(R.id.dump);
         dump.setText(stringFromJNI());
 
-        TextView pad = findViewById(R.id.pad);
-
-        Button go = findViewById(R.id.go);
+        EditText pad = findViewById(R.id.pad);
 
     }
 
@@ -32,4 +30,6 @@ public class MainActivity extends AppCompatActivity {
      * which is packaged with this application.
      */
     public native String stringFromJNI();
+
+    public native String metaL_dump();
 }
