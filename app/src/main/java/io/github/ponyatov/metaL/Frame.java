@@ -11,7 +11,7 @@ public class Frame {
     List<Frame> nest;
     Map<String,Frame> slot;
     public Frame(String T, String V) {
-        type = T;
+        type = T;//this.getClass().toString();//T;
         val  = V;
         nest = new ArrayList<Frame>();
         slot = new HashMap<String,Frame>();
@@ -32,6 +32,8 @@ public class Frame {
         String s = "\n"; for(int i=0;i<depth;i++) s += "    "; return s; }
 
     public Frame push(Frame that) { nest.add(that); return this; }
+    public Frame get(String key) { return slot.get(key); }
     public Frame set(String key, Frame what) { slot.put(key,what); return this; }
+    public Frame shl(Frame that) { return set(that.val,that); }
 
 }

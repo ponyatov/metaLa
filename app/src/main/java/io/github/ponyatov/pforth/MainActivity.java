@@ -31,7 +31,12 @@ public class MainActivity extends AppCompatActivity {
         // Example of a call to a native method
         TextView dump = findViewById(R.id.dump);
 //        dump.setText(stringFromJNI());
-        dump.setText(this.vm.toString());
+
+        vm.shl(new Cmd("activity",(ctx)->{dump.setText(this.toString());}));
+
+        dump.setText(vm.toString());
+
+        ((Cmd)vm.get("activity")).eval(vm);
 
         EditText pad = findViewById(R.id.pad);
 
