@@ -24,7 +24,9 @@ public class MainActivity extends AppCompatActivity {
 
         vm.push(new Frame("Hello","World"));
         vm.set("lexer",lexer);
-
+        lexer.input("# comment\n-01 +02.30 -04e+05 0xDeadBeef 0b1101 'some\\n\\tstring' \n");
+        for (Frame tok = lexer.token(); tok !=null; tok = lexer.token())
+            vm.push(tok);
 
         // Example of a call to a native method
         TextView dump = findViewById(R.id.dump);

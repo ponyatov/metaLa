@@ -1,9 +1,52 @@
 %%{
 	machine lexer;
+
+    sp      = [ \t\r\n]+                                    ;
+	comment = [\\\#][^\n]*                                  ;
+	str     = '\'' [^\']* '\''                              ;
+	hex     = '0x' [0-9a-fA-F]+                             ;
+	bin     = '0b' [01]+                                    ;
+	num     = [+\-]?[0-9]+('.'[0-9]*)?([eE][+\-]?[0-9]+)?   ;
+	word    = [^ \t\r\n]+                                   ;
+
+	FORTH := |*
+	    sp                                                      ;
+	    comment                                                 ;
+	    str     => { token = new Str(tok(ts-1,te+2)); fbreak; } ;
+	    hex     => { token = new Hex(tok(ts  ,te  )); fbreak; } ;
+	    bin     => { token = new Bin(tok(ts  ,te  )); fbreak; } ;
+	    num     => { token = new Num(tok(ts  ,te  )); fbreak; } ;
+	    word    => { token = new Sym(tok(ts  ,te  )); fbreak; } ;
+	*|;
 }%%
 
 package io.github.ponyatov.metaL;
 
+import java.util.Arrays;
+
 public class Lexer extends Syntax {
     public Lexer(String V) { super("lexer",V); }
+    private Frame token = null;
+    %% write data ;
+    private int cs,p,pe,ts,te,eof,act;
+    private char[] data;
+    public void input(String command) {
+          cs = lexer_start;
+        data = command.toCharArray();
+           p = 0;
+		  pe = data.length;
+		 eof = pe;
+	   token = null;
+    }
+    private String tok(int ts, int te) {
+        return new String(Arrays.copyOfRange(data,ts,te));
+    }
+    private void _token() {
+        %% write exec ;
+    }
+    public Frame token() {
+        token = null;
+        _token();
+        return token;
+    }
 }
