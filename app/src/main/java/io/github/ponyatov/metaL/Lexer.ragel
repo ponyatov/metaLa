@@ -1,0 +1,7 @@
+%%{
+	machine lexer;
+}%%
+
+public class Lexer extends Frame {
+
+}
