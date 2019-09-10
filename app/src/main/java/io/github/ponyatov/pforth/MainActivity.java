@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import io.github.ponyatov.metaL.*;
+
 public class MainActivity extends AppCompatActivity {
 
     // Used to load the 'native-lib' library on application startup.
@@ -12,14 +14,19 @@ public class MainActivity extends AppCompatActivity {
         System.loadLibrary("native-lib");
     }
 
+    VM vm = new VM("metaL") ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        vm.push(new Frame("Hello","World"));
+
         // Example of a call to a native method
         TextView dump = findViewById(R.id.dump);
-        dump.setText(stringFromJNI());
+//        dump.setText(stringFromJNI());
+        dump.setText(this.vm.toString());
 
         EditText pad = findViewById(R.id.pad);
 
