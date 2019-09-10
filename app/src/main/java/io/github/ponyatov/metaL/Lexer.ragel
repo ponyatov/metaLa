@@ -25,7 +25,7 @@ package io.github.ponyatov.metaL;
 import java.util.Arrays;
 
 public class Lexer extends Syntax {
-    public Lexer(String V) { super("lexer",V); }
+    public Lexer(String V) { super("lexer",V); input(""); }
     private Frame token = null;
     %% write data ;
     private int cs,p,pe,ts,te,eof,act;
