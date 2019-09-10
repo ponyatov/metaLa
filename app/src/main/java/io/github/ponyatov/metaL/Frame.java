@@ -1,28 +1,37 @@
 package io.github.ponyatov.metaL;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Frame {
     String type;
     String val;
     List<Frame> nest;
+    Map<String,Frame> slot;
     public Frame(String T, String V) {
-        this.type = T; this.val = V;
-        this.nest = new ArrayList<Frame>();
+        type = T;
+        val  = V;
+        nest = new ArrayList<Frame>();
+        slot = new HashMap<String,Frame>();
     }
+
     public String toString() { return this.dump(0,""); }
-    public String head(String prefix) { return "<" + this.type + ":" + this.val + ">"; }
+    public String head(String prefix) { return prefix + "<" + type + ":" + _val() + ">"; }
     public String dump(int depth,String prefix) {
-        String tree = this._pad(depth) + this.head(prefix);
-        for (Frame j: this.nest)
+        String tree = _pad(depth) + head(prefix);
+        for (Map.Entry<String, Frame> i : slot.entrySet())
+            tree += i.getValue().dump(depth+1,i.getKey() + " = ");
+        for (Frame j: nest)
             tree += j.dump(depth+1,"");
         return tree;
     }
-    public Frame push(Frame that) { this.nest.add(that); return this; }
-    public String _pad(int depth) {
-        String s = "\n";
-        for(int i=0;i<depth;i++) s += "    ";
-        return s;
-    }
+    private String _val() { return val.toString(); }
+    private String _pad(int depth) {
+        String s = "\n"; for(int i=0;i<depth;i++) s += "    "; return s; }
+
+    public Frame push(Frame that) { nest.add(that); return this; }
+    public Frame set(String key, Frame what) { slot.put(key,what); return this; }
+
 }
