@@ -2,6 +2,8 @@
 	machine lexer;
 }%%
 
-public class Lexer extends Frame {
+package io.github.ponyatov.metaL;
 
+public class Lexer extends Syntax {
+    public Lexer(String V) { super("lexer",V); }
 }

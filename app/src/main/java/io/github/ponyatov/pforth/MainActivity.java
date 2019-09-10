@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     VM vm = new VM("metaL") ;
+    Lexer lexer = new Lexer("FORTH");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         vm.push(new Frame("Hello","World"));
+        vm.set("lexer",lexer);
+
 
         // Example of a call to a native method
         TextView dump = findViewById(R.id.dump);
