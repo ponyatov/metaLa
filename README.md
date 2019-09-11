@@ -7,4 +7,4 @@ github: https://github.com/ponyatov/mlFORTH
 
 manual: https://github.com/ponyatov/mlFORTH/wiki
 
-support group: https://groups.google.com/forum/#!pendingmsg/minskymetal
+support group: https://groups.google.com/forum/#!topic/minskymetal/zB2e5uHsjjU
