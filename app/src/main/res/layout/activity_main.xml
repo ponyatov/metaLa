@@ -22,7 +22,7 @@
     <EditText
         android:id="@+id/pad"
         android:text="# put your\tcommands here"
-        android:textSize="5mm"
+        android:textSize="4mm"
         android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"

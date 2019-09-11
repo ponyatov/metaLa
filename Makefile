@@ -10,9 +10,9 @@ MERGE += app
 
 merge:
 	git checkout master
-	git checkout ponyatov -- $%(MERGE)
+	git checkout ponyatov -- $(MERGE)
 
 release:
-	git tag $(NOW)
+	-git tag $(NOW)
 	git push -v --tags
 	git checkout ponyatov
