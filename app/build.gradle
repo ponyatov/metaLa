@@ -7,30 +7,50 @@ android {
         applicationId "io.github.ponyatov.mlforth"
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode 1
-        versionName "0.0.1"
+        versionCode 190916
+        versionName "190916-d5f6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             cmake {
                 cppFlags ""
             }
         }
+        resConfigs "en"
+        resConfigs "mdpi"
     }
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-    }
-    externalNativeBuild {
-        cmake {
-            path "src/main/cpp/CMakeLists.txt"
-            version "3.10.2"
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
+    }
+    flavorDimensions 'variant'
+    productFlavors {
+        mlforth {
+            dimension = 'variant'
+            applicationId = 'io.github.ponyatov.mlforth'
+        }
+        pps {
+            dimension = 'variant'
+            applicationId = 'io.github.ponyatov.pps'
+        }
+        metal {
+            dimension = 'variant'
+            applicationId = 'io.github.ponyatov.metal'
+//            externalNativeBuild {
+//                cmake {
+//                    path "src/main/cpp/CMakeLists.txt"
+//                    version "3.10.2"
+//                }
+//            }
+        }
     }
 }
 

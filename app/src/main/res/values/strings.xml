@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">mlFORTH</string>
+    <string name="pad_init">drop dec  # put your commands here</string>
 </resources>

@@ -1,44 +1,64 @@
 package io.github.ponyatov.FORTH;
 
+import android.content.res.AssetManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import io.github.ponyatov.metaL.*;
 
 public class MainActivity extends AppCompatActivity {
 
-    // Used to load the 'native-lib' library on application startup.
-    static {
-        System.loadLibrary("native-lib");
-    }
+//    // Used to load the 'native-lib' library on application startup.
+//    static {
+//        System.loadLibrary("native-lib");
+//    }
 
-    VM vm = new VM("metaL") ;
-    Lexer lexer = new Lexer("FORTH");
+    VM vm = new VM("metaL");
+
+    TextView dump;
+    EditText pad;
+
+    // model/view sync
+    private void sync() {
+        dump.setText(vm.dump(0,"",false,true));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        vm.push(new Frame("Hello","World"));
-        vm.set("lexer",lexer);
-        lexer.input("# comment\n-01 +02.30 -04e+05 0xDeadBeef 0b1101 'some\\n\\tstring' \n");
-        for (Frame tok = lexer.token(); tok !=null; tok = lexer.token())
-            vm.push(tok);
-
+        dump = findViewById(R.id.dump);
+        pad  = findViewById(R.id.pad );
         // Example of a call to a native method
-        TextView dump = findViewById(R.id.dump);
-//        dump.setText(stringFromJNI());
+        // dump.setText(stringFromJNI());
 
-        vm.shl(new Cmd("activity",(ctx)->{dump.setText(this.toString());}));
+        vm.activity = this; // for error processing
 
-        dump.setText(vm.toString());
+        vm.push(new Frame("Hello","World"));
 
-//        ((Cmd)vm.get("activity")).eval(vm);
+        // .ini file
+        try {
+            AssetManager am = getAssets();
+            InputStream ini = am.open("metaL.ini");
+            byte[] src = new byte[ini.available()]; ini.read(src); ini.close();
+            vm.push(new Str(new String(src)));
+            VM.INTERP(vm); sync();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        EditText pad = findViewById(R.id.pad);
+        // longpress command run enable only after .ini
+        dump.setOnLongClickListener((view)->{
+            vm.push(new Str(pad.getText().toString()));
+            VM.INTERP(vm); sync();
+            return false;
+        });
 
     }
 

@@ -3,6 +3,8 @@
 
 (c) Dmitry Ponyatov <<dponyatov@gmail.com>> 2019 All rights reserved
 
+play: https://play.google.com/store/apps/details?id=io.github.ponyatov.mlforth
+
 github: https://github.com/ponyatov/mlFORTH
 
 manual: https://github.com/ponyatov/mlFORTH/wiki

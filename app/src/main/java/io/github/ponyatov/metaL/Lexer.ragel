@@ -3,19 +3,23 @@
 
     sp      = [ \t\r\n]+                                    ;
 	comment = [\\\#][^\n]*                                  ;
-	str     = '\'' [^\']* '\''                              ;
+	str     = '\'' [^\'\r\n]*? '\''                         ;
 	hex     = '0x' [0-9a-fA-F]+                             ;
 	bin     = '0b' [01]+                                    ;
-	num     = [+\-]?[0-9]+('.'[0-9]*)?([eE][+\-]?[0-9]+)?   ;
+	int     = [+\-]?[0-9]+                                  ;
+	num     = ( int '.' [0-9]* | '.' [0-9]+ )               ;
+	exp     = ( num | int ) [eE] int                        ;
 	word    = [^ \t\r\n]+                                   ;
 
 	FORTH := |*
 	    sp                                                      ;
 	    comment                                                 ;
-	    str     => { token = new Str(tok(ts-1,te+2)); fbreak; } ;
-	    hex     => { token = new Hex(tok(ts  ,te  )); fbreak; } ;
-	    bin     => { token = new Bin(tok(ts  ,te  )); fbreak; } ;
+	    str     => { token = new Str(tok(ts+1,te-1)); fbreak; } ;
+	    hex     => { token = new Hex(tok(ts+2,te  )); fbreak; } ;
+	    bin     => { token = new Bin(tok(ts+2,te  )); fbreak; } ;
+	    exp     => { token = new Num(tok(ts  ,te  )); fbreak; } ;
 	    num     => { token = new Num(tok(ts  ,te  )); fbreak; } ;
+	    int     => { token = new Int(tok(ts  ,te  )); fbreak; } ;
 	    word    => { token = new Sym(tok(ts  ,te  )); fbreak; } ;
 	*|;
 }%%
@@ -30,14 +34,26 @@ public class Lexer extends Syntax {
     %% write data ;
     private int cs,p,pe,ts,te,eof,act;
     private char[] data;
+
+    private void _input() {
+		   cs = lexer_start;
+		    p = 0;
+		   pe = data.length;
+		  eof = pe;
+	    token = null;
+	}
     public void input(String command) {
-          cs = lexer_start;
         data = command.toCharArray();
-           p = 0;
-		  pe = data.length;
-		 eof = pe;
-	   token = null;
+        _input();
     }
+    public void input(byte[] command) {
+        input(new String(command));
+    }
+
+    public void purge() {
+        data = null; p=0; pe=0;
+    }
+
     private String tok(int ts, int te) {
         return new String(Arrays.copyOfRange(data,ts,te));
     }
