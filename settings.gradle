@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name='pFORTH'
+rootProject.name='mlFORTH'
