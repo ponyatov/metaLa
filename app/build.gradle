@@ -7,8 +7,8 @@ android {
         applicationId "io.github.ponyatov"
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode 190916
-        versionName "190916-d5f6"
+        versionCode 190922
+        versionName "190922-3f37"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             cmake {
