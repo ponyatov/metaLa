@@ -34,13 +34,8 @@ public class Frame {
         String s = "\n"; for(int i=0;i<depth;i++) s += "    "; return s; }
 
     public Frame push(Frame that) { nest.add(that); return this;    }
-<<<<<<< HEAD
     public Frame pop()      { return nest.remove(nest.size()-1);    }
     public Frame pip()      { return nest.remove(nest.size()-2);    }
-=======
-    public Frame pop()      { return nest.remove(nest.size()-1); }
-    public Frame pip()      { return nest.remove(nest.size()-2); }
->>>>>>> eb82748227d6f296d4250c214b64710d4cf7603b
     public Frame top()      { return nest.get(nest.size()-1);       }
     public Frame tip()      { return nest.get(nest.size()-2);       }
     public Frame dup()      { return push(top());                   }

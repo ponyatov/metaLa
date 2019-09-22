@@ -1,16 +1,11 @@
 package io.github.ponyatov.FORTH;
 
 import android.content.res.AssetManager;
-<<<<<<< HEAD
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.method.ScrollingMovementMethod;
-=======
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
->>>>>>> eb82748227d6f296d4250c214b64710d4cf7603b
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -31,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     TextView dump;
     EditText pad;
 
-<<<<<<< HEAD
     boolean voc = true;
 
     // model/view sync
@@ -41,11 +35,6 @@ public class MainActivity extends AppCompatActivity {
         sp.sloteq   = ContextCompat.getColor(this, R.color.sloteq);
         sp.typetag  = ContextCompat.getColor(this, R.color.typetag);
         dump.setText(sp.span());
-=======
-    // model/view sync
-    private void sync() {
-        dump.setText(vm.dump(0,"",false,true));
->>>>>>> eb82748227d6f296d4250c214b64710d4cf7603b
     }
 
     @Override
@@ -73,12 +62,9 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-<<<<<<< HEAD
 //        dump.setOnClickListener((view)->{ voc = !voc; sync(); });
         dump.setMovementMethod(new ScrollingMovementMethod());
 
-=======
->>>>>>> eb82748227d6f296d4250c214b64710d4cf7603b
         // longpress command run enable only after .ini
         dump.setOnLongClickListener((view)->{
             vm.push(new Str(pad.getText().toString()));
@@ -86,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
 
-<<<<<<< HEAD
         // longpress on command field pushed new task
         pad.setOnLongClickListener((view)->{
             pad.setText("'task' task");
@@ -94,8 +79,6 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
 
-=======
->>>>>>> eb82748227d6f296d4250c214b64710d4cf7603b
     }
 
     /**

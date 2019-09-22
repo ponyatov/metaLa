@@ -4,19 +4,11 @@ android {
     compileSdkVersion 28
     buildToolsVersion "29.0.2"
     defaultConfig {
-<<<<<<< HEAD
         applicationId "io.github.ponyatov"
-        minSdkVersion 14
-        targetSdkVersion 28
-        versionCode 190922
-        versionName "190922-3be1"
-=======
-        applicationId "io.github.ponyatov.mlforth"
         minSdkVersion 14
         targetSdkVersion 28
         versionCode 190916
         versionName "190916-d5f6"
->>>>>>> eb82748227d6f296d4250c214b64710d4cf7603b
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             cmake {
@@ -43,7 +35,6 @@ android {
     productFlavors {
         mlforth {
             dimension = 'variant'
-<<<<<<< HEAD
             applicationIdSuffix = 'mlforth'
         }
         mlforth_dev {
@@ -57,17 +48,6 @@ android {
         metal {
             dimension = 'variant'
             applicationIdSuffix = 'metal'
-=======
-            applicationId = 'io.github.ponyatov.mlforth'
-        }
-        pps {
-            dimension = 'variant'
-            applicationId = 'io.github.ponyatov.pps'
-        }
-        metal {
-            dimension = 'variant'
-            applicationId = 'io.github.ponyatov.metal'
->>>>>>> eb82748227d6f296d4250c214b64710d4cf7603b
 //            externalNativeBuild {
 //                cmake {
 //                    path "src/main/cpp/CMakeLists.txt"
@@ -75,13 +55,10 @@ android {
 //                }
 //            }
         }
-<<<<<<< HEAD
         iot {
             dimension = 'variant'
             applicationIdSuffix = 'iot'
         }
-=======
->>>>>>> eb82748227d6f296d4250c214b64710d4cf7603b
     }
 }
 

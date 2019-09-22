@@ -13,7 +13,6 @@
         android:scrollbars="vertical"
         android:text="vm:metaL"
         android:textColor="@color/colorPrimary"
-<<<<<<< HEAD
         android:textSize="3mm"
         android:gravity="bottom"
         app:layout_constraintBottom_toTopOf="@id/pad"
@@ -23,16 +22,6 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         />
-=======
-        android:scrollbars = "vertical"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/pad"
-        />
-
-<!--    app:layout_constraintBottom_toBottomOf="parent"-->
->>>>>>> eb82748227d6f296d4250c214b64710d4cf7603b
 
     <EditText
         android:id="@+id/pad"
