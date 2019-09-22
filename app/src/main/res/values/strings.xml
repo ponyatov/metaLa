@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">mlFORTH</string>
+<<<<<<< HEAD
     <string name="pad_init"># put your commands here</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+=======
+    <string name="pad_init">drop dec  # put your commands here</string>
+>>>>>>> eb82748227d6f296d4250c214b64710d4cf7603b
 </resources>
