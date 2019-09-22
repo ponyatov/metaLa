@@ -1,0 +1,51 @@
+// https://habr.com/ru/post/167343/
+
+%%{
+	machine dump;
+
+    nsp =  [^ \t\r\n]+ ;
+
+    DUMP := |*
+        nsp ' = '     => { result.setSpan(COLOR(slotname),  ts  ,te-3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                           result.setSpan(COLOR(sloteq),    te-2,te-1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); } ;
+        '<' [a-z]+    => { result.setSpan(ITALIC(),         ts+1,te  , Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                           result.setSpan(COLOR(typetag),   ts  ,te  , Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); } ;
+        ':' [^>]* '>' => { result.setSpan(BOLD(),           ts+1,te-1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); } ;
+        any           => {} ;
+    *|;
+
+}%%
+
+package io.github.ponyatov.FORTH;
+
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
+import android.text.style.UnderlineSpan;
+
+public class SpanDump {
+    %% write data ;
+    private int cs,p,pe,ts,te,eof,act;
+    private char[] data;
+
+    static UnderlineSpan UNDER()    { return new UnderlineSpan(); }
+    static StyleSpan     ITALIC()   { return new StyleSpan(Typeface.ITALIC); }
+    static StyleSpan     BOLD()     { return new StyleSpan(Typeface.BOLD); }
+
+	public int slotname,sloteq,typetag;
+    static ForegroundColorSpan COLOR(int c) { return new ForegroundColorSpan(c); }
+
+	Spannable result;
+    public Spannable span() {
+        %% write exec ;
+        return result;
+    }
+    SpanDump(String dump) {
+        data = (dump+"\n\n").toCharArray(); result = new SpannableString(dump); 
+        p = 0; pe = data.length; cs = dump_start;
+    }
+}

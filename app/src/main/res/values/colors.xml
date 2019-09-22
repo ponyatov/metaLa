@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00FFAA</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#B0E0E0</color>
-    <color name="colorBackground">#000000</color>
+    <color name="colorPrimary">#0FA</color>
+    <color name="colorPrimaryDark">#066</color>
+    <color name="colorAccent">#BEE</color>
+    <color name="colorBackground">#000</color>
+    <color name="slotname">#0FF</color>
+    <color name="sloteq">#FCC</color>
+    <color name="typetag">#0C9</color>
 </resources>
