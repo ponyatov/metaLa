@@ -24,4 +24,4 @@ merge:
 release:
 	-git tag $(TAG)
 	git push -v --tags
-	git checkout ponyatov
+#	git checkout ponyatov
